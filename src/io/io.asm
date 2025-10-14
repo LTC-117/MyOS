@@ -16,8 +16,8 @@ insb:
 global insw
 insw:
     push    ebp
-
     mov     ebp, esp
+
     xor     eax, eax
     mov     edx, [ebp+8]
     in      ax, dx
