@@ -88,6 +88,10 @@ void kernel_main(void)
     void *ptr2 = kmalloc(5000);
     void *ptr3 = kmalloc(100);
 
-    if (ptr || ptr2 || ptr3) {
+    kfree(ptr);
+
+    void *ptr4 = kmalloc(50);
+
+    if (ptr || ptr2 || ptr3 || ptr4) {
     }
 }
