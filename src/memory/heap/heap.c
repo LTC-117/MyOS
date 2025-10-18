@@ -69,9 +69,87 @@ static uint32_t heap_align_value_to_upper(uint32_t val)
 }
 
 
+static int heap_get_entry_type(HEAP_BLOCK_TABLE_ENTRY entry)
+{
+    return entry & 0x0f; // Mask for the first 4 bits
+}
+
+
+static int heap_get_start_block(struct heap *heap, uint32_t total_blocks)
+{
+    struct heap_table *table = heap->table;
+    int bc = 0;
+    int bs = -1;
+
+    for (size_t i = 0; i < table->total; i++) {
+        if (heap_get_entry_type(table->entries[i]) != HEAP_BLOCK_TABLE_ENTRY_FREE) {
+            bc = 0;
+            bs = -1;
+            continue;
+        }
+
+        // If this is the first block
+        if (bs == -1) {
+            bs = i;
+        }
+        bc++;
+
+        if (bc == total_blocks) {
+            break;
+        }
+    }
+
+    if (bs == -1) {
+        return -ENOMEM;
+    }
+
+    return bs;
+}
+
+
+static void *heap_block_to_address(struct heap *heap, int block)
+{
+    return heap->saddr + (block * MYOS_HEAP_BLOCK_SIZE);
+}
+
+
+static void heap_mark_blocks_taken(struct heap *heap, int start_block,
+                                   uint32_t total_blocks)
+{
+    int end_block = (start_block + total_blocks) - 1;
+
+    HEAP_BLOCK_TABLE_ENTRY entry = HEAP_BLOCK_TABLE_ENTRY_TAKEN | HEAP_BLOCK_IS_FIRST;
+
+    if (total_blocks > 1) {
+        entry |= HEAP_BLOCK_HAS_NEXT;
+    }
+
+    for (int i = start_block; i <= end_block; i++) {
+        heap->table->entries[i] = entry;
+        entry = HEAP_BLOCK_TABLE_ENTRY_TAKEN;
+        if (i != end_block - 1) {
+            entry |= HEAP_BLOCK_HAS_NEXT;
+        }
+    }
+}
+
+
 void *heap_malloc_blocks(struct heap *heap, uint32_t total_blocks)
 {
+    void *address = 0;
 
+    int start_block = heap_get_start_block(heap, total_blocks);
+    if (start_block < 0) {
+        goto out;
+    }
+
+    address = heap_block_to_address(heap, start_block);
+
+    // Mark the blocks as taken
+    heap_mark_blocks_taken(heap, start_block, total_blocks);
+
+out:
+    return address;
 }
 
 
@@ -81,7 +159,7 @@ void *heap_malloc(struct heap *heap, size_t size)
 
     uint32_t total_blocks = aligned_size / MYOS_HEAP_BLOCK_SIZE;
 
-    return 0;
+    return heap_malloc_blocks(heap, total_blocks);
 }
 
 
