@@ -69,7 +69,13 @@ static uint32_t heap_align_value_to_upper(uint32_t val)
 }
 
 
-void *heap_malloc(size_t size)
+void *heap_malloc_blocks(struct heap *heap, uint32_t total_blocks)
+{
+
+}
+
+
+void *heap_malloc(struct heap *heap, size_t size)
 {
     size_t aligned_size = heap_align_value_to_upper(size);
 
@@ -79,6 +85,6 @@ void *heap_malloc(size_t size)
 }
 
 
-void heap_free(void *ptr)
+void heap_free(struct heap *heap, void *ptr)
 {
 }
