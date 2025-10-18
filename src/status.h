@@ -3,7 +3,7 @@
 
 
 #define MYOS_ALL_OK     0
-#define MYOS_IO_ERROR   1
+#define EIO             1
 
 
 #endif
