@@ -1,4 +1,5 @@
 #include "idt.h"
+
 #include "../config.h"
 #include "../memory/memory.h"
 #include "../kernel.h"

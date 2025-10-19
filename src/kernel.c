@@ -83,7 +83,5 @@ void kernel_main(void)
     idt_init();
 
     // Enable system interrupts
-    enable_interupts();
-
-    kheap_init();
+    enable_interrupts();
 }
