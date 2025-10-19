@@ -82,5 +82,8 @@ void kernel_main(void)
     // initialize interrupt descriptor table
     idt_init();
 
+    // Enable system interrupts
+    enable_interupts();
+
     kheap_init();
 }
