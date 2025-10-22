@@ -23,3 +23,9 @@ struct paging_4gb_chunk *paging_new_4gb(uint8_t flags)
 
     return chunk_4gb;
 }
+
+
+uint32_t *paging_4gb_chunk_get_directory(struct paging_4gb_chunk *chunk)
+{
+    return chunk->directory_entry;
+}
