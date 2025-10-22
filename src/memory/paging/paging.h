@@ -23,5 +23,6 @@ struct paging_4gb_chunk {
 
 struct paging_4gb_chunk *paging_new_4gb(uint8_t flags);
 uint32_t *paging_4gb_chunk_get_directory(struct paging_4gb_chunk *chunk);
+void enable_paging();
 
 #endif
