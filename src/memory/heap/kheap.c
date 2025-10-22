@@ -3,7 +3,7 @@
 #include "heap.h"
 #include "../../kernel.h"
 #include "../../config.h"
-#include "memory.h"
+#include "../memory.h"
 
 
 struct heap kernel_heap;
