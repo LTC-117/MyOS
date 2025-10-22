@@ -4,6 +4,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include <stdbool.h>
 
 
 #define PAGING_CACHE_DISABLED   0b00010000
