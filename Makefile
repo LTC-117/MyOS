@@ -60,7 +60,8 @@ all: ./bin/boot.bin	./bin/kernel.bin
 #----------------------------- Commands ----------------------------------------
 
 run: bin/boot.bin
-	qemu-system-x86_64 -hda bin/os.bin
+	#qemu-system-x86_64 -hda bin/os.bin
+	qemu-system-i386 -hda bin/os.bin
 .PHONY : run
 
 
