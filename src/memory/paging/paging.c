@@ -5,14 +5,14 @@
 #include "../../status.h"
 
 
-void paging_load_directory(uint32_t *directory);
+extern void paging_load_directory(uint32_t *directory);
 static uint32_t *current_directory = 0;
 
 
 struct paging_4gb_chunk *paging_new_4gb(uint8_t flags)
 {
     uint32_t *directory = kzalloc(sizeof(uint32_t) * PAGING_TOTAL_ENTRIES_PER_TABLE);
-    int offset;
+    int offset = 0;
 
     for (int i = 0; i < PAGING_TOTAL_ENTRIES_PER_TABLE; i++) {
         uint32_t *entry = kzalloc(sizeof(uint32_t) * PAGING_TOTAL_ENTRIES_PER_TABLE);
@@ -45,7 +45,7 @@ uint32_t *paging_4gb_chunk_get_directory(struct paging_4gb_chunk *chunk)
 
 bool paging_is_aligned(void *addr)
 {
-    return ((uint32_t)addr % PAGING_PAGE_SIZE == 0);
+    return ((uint32_t)addr % PAGING_PAGE_SIZE) == 0;
 }
 
 
@@ -87,4 +87,6 @@ int paging_set(uint32_t *directory, void *virt, uint32_t val)
     uint32_t *table = (uint32_t *)(entry & 0xfffff000);
 
     table[table_index] = val;
+
+    return 0;
 }
