@@ -46,7 +46,7 @@ all: ./bin/boot.bin	./bin/kernel.bin
 	i686-elf-gcc $(INCLUDES) -I./src/memory/heap $(FLAGS) -std=gnu99 -c ./src/memory/heap/kheap.c -o ./build/memory/heap/kheap.o
 
 # Paging
-./build/memory/paging/paging.o: ./src/memory/heap/kheap.c
+./build/memory/paging/paging.o: ./src/memory/paging/paging.c
 	i686-elf-gcc $(INCLUDES) -I./src/memory/paging $(FLAGS) -std=gnu99 -c ./src/memory/paging/paging.c -o ./build/memory/paging/paging.o
 
 ./build/memory/paging/paging.asm.o: ./src/memory/paging/paging.asm
@@ -60,8 +60,8 @@ all: ./bin/boot.bin	./bin/kernel.bin
 #----------------------------- Commands ----------------------------------------
 
 run: bin/boot.bin
-	#qemu-system-x86_64 -hda bin/os.bin
-	qemu-system-i386 -hda bin/os.bin
+	qemu-system-x86_64 -hda bin/os.bin
+	#qemu-system-i386 -hda bin/os.bin
 .PHONY : run
 
 
