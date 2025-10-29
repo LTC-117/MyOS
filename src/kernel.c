@@ -92,7 +92,21 @@ void kernel_main(void)
 
     paging_switch(paging_4gb_chunk_get_directory(kernel_chunk));
 
+    // Aloca um espaço na memória
+    char *ptr = kzalloc(4096);
+    // Mapeia o espaço físico alocado para 'ptr' para o endereço virtual '0x1000'
+    paging_set(paging_4gb_chunk_get_directory(kernel_chunk), (void *)0x1000, (uint32_t)ptr | PAGING_ACCESS_FROM_ALL | PAGING_IS_PRESENT | PAGING_IS_WRITEABLE);
+
+    // Habilita o paging
     enable_paging(kernel_chunk);
+
+    // 'ptr2' aponta para o endereço virtual '0x1000', que é o mesmo que foi mapeado para 'ptr'
+    char *ptr2 = (char *)0x1000;
+    ptr2[0] = 'A';
+    ptr2[1] = 'B';
+    print(ptr2);
+
+    print(ptr);
 
     // Enable system interrupts
     enable_interrupts();
