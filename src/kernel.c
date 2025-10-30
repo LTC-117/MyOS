@@ -4,6 +4,7 @@
 #include "io/io.h"
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
+#include "disk/disk.h"
 
 #include <stddef.h>
 #include <stdint.h>
@@ -94,6 +95,9 @@ void kernel_main(void)
 
     // Habilita o paging
     enable_paging(kernel_chunk);
+
+    char buf[512];
+    disk_read_sector(0, 1, buf);
 
     // Enable system interrupts
     enable_interrupts();
