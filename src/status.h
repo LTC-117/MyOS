@@ -6,7 +6,8 @@ enum error_flags {
     MYOS_ALL_OK,
     EIO,
     EINVARG,
-    ENOMEM
+    ENOMEM,
+    EFSSTR,
 };
 
 
