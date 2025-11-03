@@ -12,4 +12,7 @@
 #define MYOS_HEAP_ADDRESS       0x01000000
 #define MYOS_HEAP_TABLE_ADDRESS 0x00007E00
 
+// Filesystem
+#define MYOS_MAX_PATH           100
+
 #endif
