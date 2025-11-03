@@ -3,6 +3,8 @@
 
 
 int strlen(const char *str);
+int ctoi(char c);
+int strtoi(char *str);
 
 
 #endif
