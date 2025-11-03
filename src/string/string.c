@@ -3,7 +3,7 @@
 #include "../kmath/kmath.h"
 
 
-int strlen(const char *str)
+int kstrlen(const char *str)
 {
     int i = 0;
 
@@ -16,15 +16,15 @@ int strlen(const char *str)
 }
 
 
-int ctoi(char c)
+int kctoi(char c)
 {
     return c - '0';
 }
 
 
-int strtoi(char *str)
+int kstrtoi(char *str)
 {
-    int len = strlen(str);
+    int len = kstrlen(str);
     int num = 0;
 
     for (int i = 0; i <= len; i++) {
