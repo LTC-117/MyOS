@@ -2,9 +2,9 @@
 #define __STRING_H__
 
 
-int strlen(const char *str);
-int ctoi(char c);
-int strtoi(char *str);
+int kstrlen(const char *str);
+int kctoi(char c);
+int kstrtoi(char *str);
 
 
 #endif
