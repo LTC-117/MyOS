@@ -28,7 +28,7 @@ int kstrtoi(char *str)
     int num = 0;
 
     for (int i = 0; i <= len; i++) {
-        num += (str[i] - '0') * (kpow(10, len));
+        num += kctoi(str[i]) * (kpow(10, len));
     }
 
     return num;
