@@ -1,6 +1,12 @@
-FILES = ./build/kernel.asm.o ./build/kernel.o ./build/idt/idt.asm.o ./build/idt/idt.o ./build/memory/memory.o ./build/io/io.asm.o ./build/io/io.o ./build/memory/heap/heap.o ./build/memory/heap/kheap.o ./build/memory/paging/paging.o ./build/memory/paging/paging.asm.o ./build/disk/disk.o ./build/kmath/kmath.o ./build/kstring/kstring.o ./build/fs/pparser.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/idt/idt.asm.o ./build/idt/idt.o \
+		./build/memory/memory.o ./build/io/io.asm.o ./build/io/io.o ./build/memory/heap/heap.o \
+		./build/memory/heap/kheap.o ./build/memory/paging/paging.o ./build/memory/paging/paging.asm.o \
+		./build/disk/disk.o ./build/kmath/kmath.o ./build/kstring/kstring.o ./build/fs/pparser.o
 INCLUDES = -I./src
-FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
+FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels \
+		-falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions \
+		-Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp \
+		-Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
 
 all: ./bin/boot.bin	./bin/kernel.bin
 	rm -rf ./bin/os.bin
@@ -71,7 +77,7 @@ all: ./bin/boot.bin	./bin/kernel.bin
 ./build/kmath/kmath.o: ./src/kmath/kmath.c
 	i686-elf-gcc $(INCLUDES) -I./src/kmath $(FLAGS) -std=gnu99 -c ./src/kmath/kmath.c -o ./build/kmath/kmath.o
 
-#-------------------------------- String ---------------------------------------
+#-------------------------------- KString ---------------------------------------
 
 ./build/kstring/kstring.o: ./src/kstring/kstring.c
 	i686-elf-gcc $(INCLUDES) -I./src/kstring $(FLAGS) -std=gnu99 -c ./src/kstring/kstring.c -o ./build/kstring/kstring.o
