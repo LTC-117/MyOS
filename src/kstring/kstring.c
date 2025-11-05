@@ -5,7 +5,7 @@
 // Correction
 
 
-int kstrlen(const char *str, int max)
+int kstrlen(const char *str)
 {
     int i = 0;
 
