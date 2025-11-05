@@ -89,3 +89,18 @@ struct path_part *pparser_parse_path_part(struct path_part *last_part, const cha
 
     return part;
 }
+
+
+void pparser_free(struct path_root *root)
+{
+    struct path_part *part = root->first;
+
+    while (part) {
+        struct path_part *next_part = part->next;
+        kfree((void *)part->part);
+        kfree(part);
+        part = next_part;
+    }
+
+    kfree(root);
+}
