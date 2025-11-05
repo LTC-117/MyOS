@@ -23,5 +23,6 @@ struct path_root {
 
 struct path_part *pparser_parse_path_part(struct path_part *last_part, const char **path);
 void pparser_free(struct path_root *root);
+struct path_root *pparser_parse(const char *path, const char *currenct_directory_path);
 
 #endif
