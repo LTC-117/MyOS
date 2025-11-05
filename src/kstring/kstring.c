@@ -2,6 +2,8 @@
 
 #include "../kmath/kmath.h"
 
+// Correction
+
 
 int kstrlen(const char *str, int max)
 {
