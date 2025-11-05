@@ -70,7 +70,7 @@ static const char *pparser_get_path_part(const char **path)
 }
 
 
-struct path_part *pparser_parse_path_part(struct path_part *last_part, const char **path)
+static struct path_part *pparser_parse_path_part(struct path_part *last_part, const char **path)
 {
     const char *path_part_str = pparser_get_path_part(path);
 
