@@ -43,3 +43,28 @@ static struct path_root *pparser_create_root(int drive_no)
 
     return path_r;
 }
+
+
+static const char *pparser_get_path_part(const char **path)
+{
+    char *result_path_part = kzalloc(MYOS_MAX_PATH);
+    int i = 0;
+
+    while (**path != '/' && **path != 0) {
+        result_path_part[i] = **path;
+        *path += 1;
+        i++;
+    }
+
+    if (**path == '/') {
+        // Skip the forward slash to avoid problems
+        *path += 1;
+    }
+
+    if (i == 0) {
+        kfree(result_path_part);
+        result_path_part = 0;
+    }
+
+    return result_path_part;
+}
