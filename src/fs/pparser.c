@@ -9,7 +9,7 @@
 
 static int pparser_path_valid_format(const char *file_name)
 {
-    int len = kstrlen(file_name, MYOS_MAX_PATH);
+    int len = kstrlen(file_name);
 
     if (len > MYOS_MAX_PATH) {
         return -EBADPATH;
@@ -103,4 +103,41 @@ void pparser_free(struct path_root *root)
     }
 
     kfree(root);
+}
+
+
+struct path_root *pparser_parse(const char *path, const char *currenct_directory_path)
+{
+    int res = 0;
+    const char *tmp_path = path;
+    struct path_root *path_root = 0;
+
+    if (kstrlen(path) > MYOS_MAX_PATH) {
+        goto out;
+    }
+
+    res = pparser_get_drive_by_path(&tmp_path);
+    if (res < 0) {
+        goto out;
+    }
+
+    path_root = pparser_create_root(res);
+    if (!path_root) {
+        goto out;
+    }
+
+    struct path_part *first_part = pparser_parse_path_part(NULL, &tmp_path);
+    if (!first_part) {
+        goto out;
+    }
+
+    path_root->first = first_part;
+
+    struct path_part *part = pparser_parse_path_part(first_part, &tmp_path);
+    while (part) {
+        part = pparser_parse_path_part(part, &tmp_path);
+    }
+
+out:
+    return path_root;
 }
