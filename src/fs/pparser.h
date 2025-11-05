@@ -21,7 +21,5 @@ struct path_root {
  *   - abc.txt  -> path part no 1
  */
 
-static int path_valid_format(const char *file_name);
-
 
 #endif
