@@ -7,7 +7,7 @@ enum error_flags {
     EIO,
     EINVARG,
     ENOMEM,
-    EFSSTR,
+    EBADPATH,
 };
 
 
