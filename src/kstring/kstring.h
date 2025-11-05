@@ -7,7 +7,7 @@
 #include <stdbool.h>
 
 
-int kstrlen(const char *str, int max);
+int kstrlen(const char *str);
 bool kisdigit(char c);
 int kctoi(char c);
 int kstrtoi(char *str);
