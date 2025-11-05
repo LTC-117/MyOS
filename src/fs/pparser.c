@@ -68,3 +68,24 @@ static const char *pparser_get_path_part(const char **path)
 
     return result_path_part;
 }
+
+
+struct path_part *pparser_parse_path_part(struct path_part *last_part, const char **path)
+{
+    const char *path_part_str = pparser_get_path_part(path);
+
+    if (!path_part_str) {
+        return 0;
+    }
+
+    struct path_part *part = kzalloc(sizeof(struct path_part));
+
+    part->part = path_part_str;
+    part->next = 0x00;
+
+    if (last_part) {
+        last_part->next = part;
+    }
+
+    return part;
+}
