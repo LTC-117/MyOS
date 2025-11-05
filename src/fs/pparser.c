@@ -3,6 +3,7 @@
 #include "../config.h"
 #include "../status.h"
 #include "../memory/memory.h"
+#include "../memory/heap/kheap.h"
 #include "../kstring/kstring.h"
 
 
@@ -30,4 +31,15 @@ static int pparser_get_drive_by_path(const char **path)
     *path += 3;
 
     return drive_no;
+}
+
+
+static struct path_root *pparser_create_root(int drive_no)
+{
+    struct path_root *path_r = kzalloc(sizeof(struct path_root));
+
+    path_r->drive_no = drive_no;
+    path_r->first = 0;
+
+    return path_r;
 }
