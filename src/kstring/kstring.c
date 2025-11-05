@@ -3,7 +3,7 @@
 #include "../kmath/kmath.h"
 
 
-int kstrlen(const char *str)
+int kstrlen(const char *str, int max)
 {
     int i = 0;
 
@@ -13,6 +13,12 @@ int kstrlen(const char *str)
     }
 
     return i;
+}
+
+
+bool kisdigit(char c)
+{
+    return (c >= 48) && (c <= 57);
 }
 
 
