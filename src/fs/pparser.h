@@ -21,5 +21,6 @@ struct path_root {
  *   - abc.txt  -> path part no 1
  */
 
+struct path_part *pparser_parse_path_part(struct path_part *last_part, const char **path);
 
 #endif
