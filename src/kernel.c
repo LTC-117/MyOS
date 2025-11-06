@@ -7,6 +7,7 @@
 #include "disk/disk.h"
 #include "kmath/kmath.h"
 #include "kstring/kstring.h"
+#include "fs/pparser.h"
 
 #include <stddef.h>
 #include <stdint.h>
@@ -35,4 +36,10 @@ void kernel_main(void)
 
     // Enable system interrupts
     enable_interrupts();
+
+    struct path_root *root_path = pparser_parse("0:/bin/shell.exe", NULL);
+
+    if (root_path) {
+
+    }
 }
