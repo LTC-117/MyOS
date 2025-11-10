@@ -34,4 +34,12 @@ static inline void list_add(struct list_head *new_item,
 }
 
 
+static inline void __list_delete(struct list_head *previous,
+                               struct list_head *next)
+{
+    next->prev = previous;
+    previous->next = next;
+}
+
+
 #endif
