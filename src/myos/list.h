@@ -73,4 +73,8 @@ static inline void list_splice(struct list_head *list,
 }
 
 
+#define list_entry(ptr, type, member)       \
+    ( (type *)((char *)(ptr) - (unsigned long)(&((type *)0)->member)) )
+
+
 #endif
