@@ -48,4 +48,10 @@ static inline void list_delete(struct list_head *entry)
 }
 
 
+static inline int list_empty(struct list_head *head)
+{
+    return (head->next == head);
+}
+
+
 #endif
