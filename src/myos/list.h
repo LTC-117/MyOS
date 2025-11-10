@@ -42,4 +42,10 @@ static inline void __list_delete(struct list_head *previous,
 }
 
 
+static inline void list_delete(struct list_head *entry)
+{
+    __list_delete(entry->prev, entry->next);
+}
+
+
 #endif
