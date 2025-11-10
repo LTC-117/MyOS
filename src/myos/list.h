@@ -54,4 +54,23 @@ static inline int list_empty(struct list_head *head)
 }
 
 
+static inline void list_splice(struct list_head *list,
+                               struct list_head *head)
+{
+    struct list_head *first = list->next;
+
+    // Which means : if list exists!
+    if (first != list) {
+        struct list_head *last = list->prev;
+        struct list_head *now = head->next;
+
+        first->prev = head;
+        head->next = first;
+
+        last->next = now;
+        now->prev = last;
+    }
+}
+
+
 #endif
