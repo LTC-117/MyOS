@@ -59,3 +59,14 @@ int kstrncmp(char *first, char *second, int size)
 
     return res;
 }
+
+
+int kstrcmp(char *first, char *second)
+{
+    int size1 = kstrlen(first);
+    int size2 = kstrlen(second);
+
+    if (size1 >= size2) return kstrncmp(first, second, size1);
+
+    return kstrncmp(first, second, size2);
+}
