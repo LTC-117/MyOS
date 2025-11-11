@@ -30,11 +30,11 @@ int kctoi(char c)
 
 int kstrtoi(char *str)
 {
-    int len = kstrlen(str);
+    int len = kstrlen(str) - 1;
     int num = 0;
 
     for (int i = 0; i <= len; i++) {
-        num += kctoi(str[i]) * (kpow(10, len));
+        num += kctoi(str[i]) * (kpow(10, len - i));
     }
 
     return num;
