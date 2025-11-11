@@ -2,8 +2,6 @@
 
 #include "../kmath/kmath.h"
 
-// Correction
-
 
 int kstrlen(const char *str)
 {
@@ -40,4 +38,24 @@ int kstrtoi(char *str)
     }
 
     return num;
+}
+
+
+int kstrncmp(char *first, char *second, int size)
+{
+    int res = 0;
+
+    size = (size > kstrlen(first))
+        ? kstrlen(first)
+        : (size > kstrlen(second))
+        ? kstrlen(second)
+        : size;
+
+    for (int i = 0; i < size; i++) {
+        res = first - second;
+
+        if (res != 0) break;
+    }
+
+    return res;
 }
