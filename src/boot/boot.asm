@@ -10,11 +10,31 @@ DATA_SEG equ gdt_data - gdt_start
 ; ---------------------------- BIOS Parameter Block ----------------------------
 ; ------------------------------------------------------------------------------
 
-_start:             ; BPB offset 0x00 (bytes 0 a 2)
-    jmp short start
-    nop
+jmp short start
+nop
 
-times 33 db 0       ; dummy pros outros 33 bytes que a BIOS espera do BPB
+; FAT16 Header
+OEMIdentifier       db 'MYOS OEM'
+BytesPerSector      dw 0x200
+SectorsPerCluster   db 0x80
+ReservedSectors	    dw 200		    ; Reserved sectors before FAT
+FATCopies		    db 0x02		    ; Often this value is 2
+RootDirEntries	    dw 0x40		    ; 64 Root directory entries
+NumSectors	        dw 0x0000		; If 0, there are more than 65535 sectors
+MediaType		    db 0xF8		    ; Fixed disk → Harkdisk
+SectorsPerFAT	    dw 0x0100		; Sectors used by each FAT table
+SectorsPerTrack	    dw 0x20		    ; TODO: Look up? BIOS might change those
+NumberOfHeads	    dw 0x40	        ; Does this even matter?
+HiddenSectors	    dd 0x00
+SectorsBig	        dd 0x773594
+
+; Extended BPB (DOS 4.0)
+DriveNumber	        db 0x80		    ; 0 for removable, 0x80 for HD
+WinNTBit		    db 0x00		    ; WinNT uses this
+Signature		    db 0x29		    ; dos 4.0 EBPB signature
+VolumeID		    dd 0x0000D105	; Volume ID
+VolumeIDString	    db 'MYOS BOOT  '; Volume ID
+SystemIDString	    db 'FAT16   '	; File system type
 
 ; ------------------------------------------------------------------------------
 ; ------------------- Label de início da execução do código --------------------
