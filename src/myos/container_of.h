@@ -2,7 +2,7 @@
 #define __MYOS_CONTAINER_OF_H__
 
 #include <stddef.h>
-#include <assert.h>
+//#include <assert.h>
 
 
 #define typeof_member(T, m)     typeof(((T *)0)->m)
